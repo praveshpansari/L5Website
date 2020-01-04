@@ -1,0 +1,317 @@
+.preloader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eee;
+
+  position: fixed;
+  z-index: 997;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.dropdown-content li a {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: normal;
+  width: 100%;
+}
+
+.tab a {
+  font-weight: 500;
+}
+
+.dropdown-content li {
+  text-align: center;
+  width: 100% !important;
+}
+
+.card.medium {
+  width: 300px;
+}
+
+.card-panel {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+#listing {
+  margin-top: 5rem;
+}
+
+#listing .row .col .card-panel {
+  width: 22rem;
+  margin: auto;
+}
+
+#listing .row .col .card-panel .card-image {
+  overflow: hidden;
+  background-color: white;
+}
+
+#listing .row .col .card-panel .card-image:hover {
+  overflow: hidden;
+  background-color: white;
+}
+
+#listing .row .col .card-panel .card-image img{
+  height: 25rem;
+  width: 100%;
+  object-fit: contain;
+  transition: transform .5s ease;
+}
+
+#listing .row .col .card-panel .card-image img:hover{
+  transform: scale(1.1);
+}
+
+#listing .row .col h5 .price{
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-weight: bold;
+  color: #663047;
+  font-size: 1.55rem;
+}
+
+#listing .row .col h5 .brand {
+  text-transform: uppercase;
+  font-weight: lighter;
+  font-size: 1.25rem;
+}
+
+#listing .row .col h5 .make {
+  font-style: italic;
+  font-weight: normal;
+  text-transform: lowercase;
+  font-size: 1.55rem;
+  
+  font-family: "Playfair Display", serif;
+}
+
+.card.small .card-image,
+.card.medium .card-image,
+.card.large .card-image {
+  max-height: 100%;
+}
+.card.small .card-image + .card-content,
+.card.medium .card-image + .card-content,
+.card.large .card-image + .card-content {
+  max-height: 0%;
+}
+.card .card-image img {
+  object-fit: contain;
+}
+.checkbox-blue[type="checkbox"]:checked + span:not(.lever):before {
+  border-right: 2px solid rgba(244, 67, 54, 0.7);
+  border-bottom: 2px solid rgba(244, 67, 54, 0.7);
+}
+
+.modal button{
+  background-color: transparent;
+  border: 1px solid rgb(72, 18, 43);
+  color: rgb(72, 18, 43);
+  height: 56px;
+  line-height: 48px;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.modal button:hover {
+  background-color: rgb(72, 18, 43);
+  color: white;
+}
+
+.modal button:focus {
+  background-color: rgb(72, 18, 43);
+  color: white;
+}
+
+.hovered {
+  display: none;
+  margin:auto;
+  margin-top: 1.45rem;
+}
+
+.favorite {
+  background-color: transparent;
+  color: rgb(72, 18, 43);
+  height: 50px;
+  line-height: 50px;
+  transition-duration: 0.3s;
+}
+
+.waves-effect.waves-wine .waves-ripple {
+  background-color: rgba(72, 18, 43, 0.75);
+}
+
+.favorite:hover,.favorite:focus {
+  background-color: rgb(72, 18, 43);
+  color: white;
+}
+
+.favorite i {
+  font-size: 1.75rem;
+  transition-duration: 0.2s;
+}
+
+.sidenav.slide2 {
+  width:19rem !important;
+}
+
+.sidenav {
+  z-index: 9 !important;
+}
+
+#slide-out2 .background{
+  background-color: rgb(72, 18, 43);
+}
+
+.cart-button {
+  background-color: rgb(72, 18, 43);
+  color: white;
+  height: 50px;
+  line-height: 48px;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.cart-button:hover, .cart-button:focus {
+  background-color: transparent;
+  color: rgb(72, 18, 43);
+}
+
+.modal-footer {
+  margin-top: -55px !important;
+}
+
+@media only screen and (min-width: 1366px) and (max-width: 1600px) {
+  .modal {
+    width: 28%;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1366px) {
+  .modal {
+    width: 34%;
+  }
+}
+
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+  .modal {
+    width: 40%;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .modal {
+    width: 48%;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .modal {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .modal {
+    width: 80%;
+  }
+}
+
+nav {
+  margin-top: 3%;
+  background-color: transparent;
+  border: none;
+}
+
+nav.mainpage {
+  position: absolute;
+  top: 3%;
+  background-color: transparent;
+  z-index: 3;
+  border: none;
+}
+
+nav ul li .sidenav-trigger {
+  margin: 0;
+}
+
+nav .icon-items {
+  width: 120px;
+  margin-right: 1%;
+}
+
+nav .icon-items li {
+  width: 33%;
+}
+
+nav .nav-wrapper .menu-items {
+  margin-right: 15%;
+  width: 30%;
+}
+
+.nav-wrapper .menu-items li {
+  text-align: center;
+  width: 33%;
+}
+
+nav ul a {
+  background-color: rgba(0, 0, 0, 0) !important;
+  color: #663047;
+  font-weight: bold;
+}
+
+nav ul a:focus {
+  outline: none;
+}
+
+.product-btn {
+  background-color: transparent;
+  border: 1px solid rgb(72, 18, 43);
+  color: rgb(72, 18, 43);
+  height: 50px;
+  line-height: 48px;
+  width: 200px;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.product-btn:hover {
+  background-color: rgb(72, 18, 43);
+  color: white;
+}
+
+.sort {
+  margin:auto;
+  width: 8rem;
+}
+
+.sort .dropdown-content li>a, .dropdown-content li>span {
+  color: rgb(72, 18, 43);
+}
+
+
+header h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 120px;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: lowercase;
+  letter-spacing: 3px;
+  line-height: 170px;
+  color: rgb(72, 18, 43);
+}
+
+header h5 {
+  font-family: "Playfair Display", serif;
+  color: #663047;
+  font-weight: 400;
+}
