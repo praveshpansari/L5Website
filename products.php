@@ -217,15 +217,13 @@ if (!isset($_GET['sorting'])) {
             </li>
             <li>
                 <div class='row'>
-                    <div class="col offset-s3">
+                    <div class="col offset-s1">
                         <label for="filter">
-                            <input id="filter" onchange="filterCheck()" <?php if (isset($_GET['filter'])) echo 'checked' ?> type="checkbox" name="filter" class="filled-in" />
-                            <span>Filter</span>
+                            <input id="filter" onchange="filterCheck('category','filter')" <?php if (isset($_GET['filter'])) echo 'checked' ?> type="checkbox" name="filter" class="filled-in" />
+                            <span>Filter by category</span>
                         </label>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col offset-s2 s9">
+                    <div class="categories col offset-s2 s9">
                         <label for="red">
                             <input id="red" value="1" <?php if (!isset($_GET['filter'])) echo 'disabled'; ?> <?php if (isset($_GET['category']) && $_GET['category'] == 1) echo 'checked' ?> name="category" type="radio" />
                             <span>Red Wine</span>
@@ -242,13 +240,63 @@ if (!isset($_GET['sorting'])) {
                         </label>
                         <br>
                         <label>
-                            <input id="sparkling" value="4" <?php if (!isset($_GET['filter'])) echo 'disabled'; ?> <?php if (isset($_GET['category']) && $_GET['category'] == 4) echo 'checked' ?> name="category" type="radio" />
+                            <input id="sparkling" required value="4" <?php if (!isset($_GET['filter'])) echo 'disabled'; ?> <?php if (isset($_GET['category']) && $_GET['category'] == 4) echo 'checked' ?> name="category" type="radio" />
                             <span>Sparkling Wine & Champagne</span>
                         </label>
                         <br>
                         <label>
                             <input id="sweet" value="5" <?php if (!isset($_GET['filter'])) echo 'disabled'; ?> <?php if (isset($_GET['category']) && $_GET['category'] == 5) echo 'checked' ?> name="category" type="radio" />
                             <span>Dessert & Sweet Wine</span>
+                        </label>
+                    </div>
+                </div>
+            <li>
+                <div class='row'>
+                    <div class="col offset-s1">
+                        <label for="filter1">
+                            <input id="filter1" onchange="filterCheck('brand','filter1')" <?php if (isset($_GET['filter1'])) echo 'checked' ?> type="checkbox" name="filter1" class="filled-in" />
+                            <span>Filter by brand</span>
+                        </label>
+                    </div>
+                    <div class="brands col offset-s2 s9">
+                        <label>
+                            <input id="soldechile" value="1" <?php if (!isset($_GET['filter1'])) echo 'disabled'; ?> <?php if (isset($_GET['brand']) && $_GET['brand'] == 1) echo 'checked' ?> name="brand" type="radio" />
+                            <span>Sol De Chile</span>
+                        </label>
+
+                        <label>
+                            <input id="cutler" value="2" <?php if (!isset($_GET['filter1'])) echo 'disabled'; ?> <?php if (isset($_GET['brand']) && $_GET['brand'] == 2) echo 'checked' ?> name="brand" type="radio" />
+                            <span>Cutler Crest</span>
+                        </label>
+                        <br>
+                        <label>
+                            <input id="bortoli" value="3" <?php if (!isset($_GET['filter1'])) echo 'disabled'; ?> <?php if (isset($_GET['brand']) && $_GET['brand'] == 3) echo 'checked' ?> name="brand" type="radio" />
+                            <span>De Bortoli</span>
+                        </label>
+                        <br>
+                        <label>
+                            <input id="deenvat" required value="4" <?php if (!isset($_GET['filter1'])) echo 'disabled'; ?> <?php if (isset($_GET['brand']) && $_GET['brand'] == 4) echo 'checked' ?> name="brand" type="radio" />
+                            <span>De Bortoli-Deen Vat</span>
+                        </label>
+                        <br>
+                        <label>
+                            <input id="marquis" value="5" <?php if (!isset($_GET['filter1'])) echo 'disabled'; ?> <?php if (isset($_GET['brand']) && $_GET['brand'] == 5) echo 'checked' ?> name="brand" type="radio" />
+                            <span>Marquis De Brun</span>
+                        </label>
+                        <br>
+                        <label>
+                            <input id="longchamp" value="6" <?php if (!isset($_GET['filter1'])) echo 'disabled'; ?> <?php if (isset($_GET['brand']) && $_GET['brand'] == 6) echo 'checked' ?> name="brand" type="radio" />
+                            <span>Longchamp</span>
+                        </label>
+                        <br>
+                        <label>
+                            <input id="novecento" value="7" <?php if (!isset($_GET['filter1'])) echo 'disabled'; ?> <?php if (isset($_GET['brand']) && $_GET['brand'] == 7) echo 'checked' ?> name="brand" type="radio" />
+                            <span>Novecento</span>
+                        </label>
+                        <br>
+                        <label>
+                            <input id="ventisquero" value="8" <?php if (!isset($_GET['filter1'])) echo 'disabled'; ?> <?php if (isset($_GET['brand']) && $_GET['brand'] == 8) echo 'checked' ?> name="brand" type="radio" />
+                            <span>Ventisquero</span>
                         </label>
                     </div>
                 </div>
@@ -306,13 +354,57 @@ if (!isset($_GET['sorting'])) {
         if (mysqli_num_rows($result) > 0) {
             echo "<div class='row'>";
             while ($row = mysqli_fetch_assoc($result)) {
-                if (isset($_GET['category'])) {
+                if (isset($_GET['category']) && isset($_GET['brand'])) {
                     $category = $row['category_no'];
+                    $brand = $row['brand_id'];
+                    if ($_GET['category'] == $category && $_GET['brand'] == $brand) {
+                        if ($count % 3 == 0 && $count != 0) {
+                            echo "</div>";
+                        }
+                        $product = $row['product_id'];
+                        $sub = mysqli_fetch_assoc(mysqli_query($conn, "SELECT sub_category_no FROM wine_sub WHERE product_id = '$product'"))['sub_category_no'];
+                        echo "<div class='products col s12 m6 l4'>
+                <div class='card-panel'>
+                <div class='card-image'>
+                <img src='" . $row['image_url'] . "'>
+                </div>
+              </div>
+              <h5 class='list center-align'><span class='brand'>" . mysqli_fetch_assoc(mysqli_query($conn, ("SELECT brand_name FROM brand WHERE brand_id = '$brand'")))['brand_name'] . "</span><br><span class='make'>" . mysqli_fetch_assoc(mysqli_query($conn, ("SELECT Sub_category from subcategories WHERE Type_no = '$sub'")))['Sub_category'] . ' ' . $row['year'] . "</span><br><span class='price'>$" . $row['price'] . "</span></h5>
+              <div class='hovered center-align'><a href='cart.php?product=" . $product . "' class='cart-button waves-effect waves-wine btn'>Add to Cart</a><a class='favorite waves-effect waves-light btn'><i class='material-icons'>favorite</i></a></div></div>";
+                        $count++;
+                        if ($count % 3 == 0) {
+                            echo "<div class='row'>";
+                        }
+                    }
+                } elseif (isset($_GET['category'])) {
+                    $category = $row['category_no'];
+                    $brand = $row['brand_id'];
                     if ($_GET['category'] == $category) {
                         if ($count % 3 == 0 && $count != 0) {
                             echo "</div>";
                         }
-                        $brand = $row['brand_id'];
+                        $product = $row['product_id'];
+                        $sub = mysqli_fetch_assoc(mysqli_query($conn, "SELECT sub_category_no FROM wine_sub WHERE product_id = '$product'"))['sub_category_no'];
+                        echo "<div class='products col s12 m6 l4'>
+                <div class='card-panel'>
+                <div class='card-image'>
+                <img src='" . $row['image_url'] . "'>
+                </div>
+              </div>
+              <h5 class='list center-align'><span class='brand'>" . mysqli_fetch_assoc(mysqli_query($conn, ("SELECT brand_name FROM brand WHERE brand_id = '$brand'")))['brand_name'] . "</span><br><span class='make'>" . mysqli_fetch_assoc(mysqli_query($conn, ("SELECT Sub_category from subcategories WHERE Type_no = '$sub'")))['Sub_category'] . ' ' . $row['year'] . "</span><br><span class='price'>$" . $row['price'] . "</span></h5>
+              <div class='hovered center-align'><a href='cart.php?product=" . $product . "' class='cart-button waves-effect waves-wine btn'>Add to Cart</a><a class='favorite waves-effect waves-light btn'><i class='material-icons'>favorite</i></a></div></div>";
+                        $count++;
+                        if ($count % 3 == 0) {
+                            echo "<div class='row'>";
+                        }
+                    }
+                } elseif (isset($_GET['brand'])) {
+                    $category = $row['category_no'];
+                    $brand = $row['brand_id'];
+                    if ($_GET['brand'] == $brand) {
+                        if ($count % 3 == 0 && $count != 0) {
+                            echo "</div>";
+                        }
                         $product = $row['product_id'];
                         $sub = mysqli_fetch_assoc(mysqli_query($conn, "SELECT sub_category_no FROM wine_sub WHERE product_id = '$product'"))['sub_category_no'];
                         echo "<div class='products col s12 m6 l4'>

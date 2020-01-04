@@ -24,6 +24,11 @@
   font-weight: 500;
 }
 
+.categories,
+.brands {
+  display: none;
+}
+
 .dropdown-content li {
   text-align: center;
   width: 100% !important;
@@ -57,18 +62,18 @@
   background-color: white;
 }
 
-#listing .row .col .card-panel .card-image img{
+#listing .row .col .card-panel .card-image img {
   height: 25rem;
   width: 100%;
   object-fit: contain;
-  transition: transform .5s ease;
+  transition: transform 0.5s ease;
 }
 
-#listing .row .col .card-panel .card-image img:hover{
+#listing .row .col .card-panel .card-image img:hover {
   transform: scale(1.1);
 }
 
-#listing .row .col h5 .price{
+#listing .row .col h5 .price {
   font-family: "Playfair Display", serif;
   font-style: italic;
   font-weight: bold;
@@ -87,7 +92,7 @@
   font-weight: normal;
   text-transform: lowercase;
   font-size: 1.55rem;
-  
+
   font-family: "Playfair Display", serif;
 }
 
@@ -109,7 +114,7 @@
   border-bottom: 2px solid rgba(244, 67, 54, 0.7);
 }
 
-.modal button{
+.modal button {
   background-color: transparent;
   border: 1px solid rgb(72, 18, 43);
   color: rgb(72, 18, 43);
@@ -132,7 +137,7 @@
 
 .hovered {
   display: none;
-  margin:auto;
+  margin: auto;
   margin-top: 1.45rem;
 }
 
@@ -148,7 +153,8 @@
   background-color: rgba(72, 18, 43, 0.75);
 }
 
-.favorite:hover,.favorite:focus {
+.favorite:hover,
+.favorite:focus {
   background-color: rgb(72, 18, 43);
   color: white;
 }
@@ -159,14 +165,14 @@
 }
 
 .sidenav.slide2 {
-  width:19rem !important;
+  width: 19rem !important;
 }
 
 .sidenav {
   z-index: 9 !important;
 }
 
-#slide-out2 .background{
+#slide-out2 .background {
   background-color: rgb(72, 18, 43);
 }
 
@@ -180,7 +186,8 @@
   letter-spacing: 2px;
 }
 
-.cart-button:hover, .cart-button:focus {
+.cart-button:hover,
+.cart-button:focus {
   background-color: transparent;
   color: rgb(72, 18, 43);
 }
@@ -290,14 +297,14 @@ nav ul a:focus {
 }
 
 .sort {
-  margin:auto;
+  margin: auto;
   width: 8rem;
 }
 
-.sort .dropdown-content li>a, .dropdown-content li>span {
+.sort .dropdown-content li > a,
+.dropdown-content li > span {
   color: rgb(72, 18, 43);
 }
-
 
 header h1 {
   font-family: "Playfair Display", serif;

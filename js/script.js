@@ -12,6 +12,7 @@ $('.dropdown-button').dropdown(
     });
 
 $(document).ready(function () {
+    $('.collapsible').collapsible();
     $('select').formSelect();
     $('.sidenav').sidenav();
     $('.slide2').sidenav({
@@ -30,11 +31,31 @@ $(document).ready(function () {
         $(this).find('.list').slideDown(500);
         $(this).find('.hovered').fadeOut(300);
     }).mouseleave();
+
+    if (document.getElementById("filter").checked)
+        $('.categories').slideDown("slow");
+
+    if (document.getElementById("filter1").checked)
+        $('.brands').slideDown("slow");
+
+    $('#filter').click(function () {
+        if (document.getElementById("filter").checked)
+            $('.categories').slideDown("slow");
+        else
+            $('.categories').slideUp("slow");
+    });
+
+    $('#filter1').click(function () {
+        if (document.getElementById("filter1").checked)
+            $('.brands').slideDown("slow");
+        else
+            $('.brands').slideUp("slow");
+    });
 });
 
-function filterCheck() {
-    var cats = document.getElementsByName('category');
-    if (document.getElementById("filter").checked) {
+function filterCheck(buttons,fil) {
+    var cats = document.getElementsByName(buttons);
+    if (document.getElementById(fil).checked) {
         for (var i = 0, len = cats.length; i < len; i++) {
             cats[i].disabled = false;
         }
