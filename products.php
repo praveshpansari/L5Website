@@ -322,7 +322,7 @@ if (!isset($_GET['sorting'])) {
                 </ul>
                 <ul class="menu-items right hide-on-med-and-down">
                     <li><a href="#">SHOP</a></li>
-                    <li><a href="#">HOME</a></li>
+                    <li><a href="fav.php">HOME</a></li>
                     <li><a class='dropdown-button' href="#" data-target='dropdown1'>ABOUT</a></li>
                 </ul>
             </div>
@@ -332,6 +332,7 @@ if (!isset($_GET['sorting'])) {
     <div id="listing" class="container">
         <?php
         $count = 0;
+        $user = $_SESSION['user'];
         if (isset($_GET['descending'])) {
             if ($_GET['sorting'] == 2)
                 $query = 'SELECT * FROM wine, brand, wine_sub, subcategories WHERE wine.product_id = wine_sub.product_id AND wine.brand_id = brand.brand_id AND wine_sub.sub_category_no = subcategories.Type_no order by price desc';
@@ -348,7 +349,19 @@ if (!isset($_GET['sorting'])) {
                 $query = 'SELECT * FROM wine, brand, wine_sub, subcategories WHERE wine.product_id = wine_sub.product_id AND wine.brand_id = brand.brand_id AND wine_sub.sub_category_no = subcategories.Type_no order by brand_name, Sub_category';
         }
 
+        $query1 = "SELECT product_id from favorites WHERE UserID = '$user'";
+        $result1 = mysqli_query($conn, $query1);
+        $favorite = array();
+        if(mysqli_num_rows($result1) > 0) {
+            while($row = mysqli_fetch_assoc($result1))
+            {
+                array_push($favorite, $row['product_id']);
+            }
+        }
+        
+        print_r($favorite);
 
+        
 
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) > 0) {
@@ -366,11 +379,11 @@ if (!isset($_GET['sorting'])) {
                         echo "<div class='products col s12 m6 l4'>
                 <div class='card-panel'>
                 <div class='card-image'>
-                <img src='" . $row['image_url'] . "'>
+                <img src='" . $row['image_url'] . "'>" . (in_array($product, $favorite) ? "<i class='material-icons'>grade</i>" : "") . "
                 </div>
               </div>
               <h5 class='list center-align'><span class='brand'>" . mysqli_fetch_assoc(mysqli_query($conn, ("SELECT brand_name FROM brand WHERE brand_id = '$brand'")))['brand_name'] . "</span><br><span class='make'>" . mysqli_fetch_assoc(mysqli_query($conn, ("SELECT Sub_category from subcategories WHERE Type_no = '$sub'")))['Sub_category'] . ' ' . $row['year'] . "</span><br><span class='price'>$" . $row['price'] . "</span></h5>
-              <div class='hovered center-align'><a href='cart.php?product=" . $product . "' class='cart-button waves-effect waves-wine btn'>Add to Cart</a><a class='favorite waves-effect waves-light btn'><i class='material-icons'>favorite</i></a></div></div>";
+              <div class='hovered center-align'><a href='cart.php?product=" . $product . "' class='cart-button waves-effect waves-wine btn'>Add to Cart</a><a href='favorite.php?product=" . $product . "' class='favorite waves-effect waves-light btn'><i class='material-icons'>favorite</i></a></div></div>";
                         $count++;
                         if ($count % 3 == 0) {
                             echo "<div class='row'>";
@@ -388,11 +401,11 @@ if (!isset($_GET['sorting'])) {
                         echo "<div class='products col s12 m6 l4'>
                 <div class='card-panel'>
                 <div class='card-image'>
-                <img src='" . $row['image_url'] . "'>
+                <img src='" . $row['image_url'] . "'>" . (in_array($product, $favorite) ? "<i class='material-icons'>grade</i>" : "") . "
                 </div>
               </div>
               <h5 class='list center-align'><span class='brand'>" . mysqli_fetch_assoc(mysqli_query($conn, ("SELECT brand_name FROM brand WHERE brand_id = '$brand'")))['brand_name'] . "</span><br><span class='make'>" . mysqli_fetch_assoc(mysqli_query($conn, ("SELECT Sub_category from subcategories WHERE Type_no = '$sub'")))['Sub_category'] . ' ' . $row['year'] . "</span><br><span class='price'>$" . $row['price'] . "</span></h5>
-              <div class='hovered center-align'><a href='cart.php?product=" . $product . "' class='cart-button waves-effect waves-wine btn'>Add to Cart</a><a class='favorite waves-effect waves-light btn'><i class='material-icons'>favorite</i></a></div></div>";
+              <div class='hovered center-align'><a href='cart.php?product=" . $product . "' class='cart-button waves-effect waves-wine btn'>Add to Cart</a><a href='favorite.php?product=" . $product . "' class='favorite waves-effect waves-light btn'><i class='material-icons'>favorite</i></a></div></div>";
                         $count++;
                         if ($count % 3 == 0) {
                             echo "<div class='row'>";
@@ -410,11 +423,11 @@ if (!isset($_GET['sorting'])) {
                         echo "<div class='products col s12 m6 l4'>
                 <div class='card-panel'>
                 <div class='card-image'>
-                <img src='" . $row['image_url'] . "'>
+                <img src='" . $row['image_url'] . "'>" . (in_array($product, $favorite) ? "<i class='material-icons'>grade</i>" : "") . "
                 </div>
               </div>
               <h5 class='list center-align'><span class='brand'>" . mysqli_fetch_assoc(mysqli_query($conn, ("SELECT brand_name FROM brand WHERE brand_id = '$brand'")))['brand_name'] . "</span><br><span class='make'>" . mysqli_fetch_assoc(mysqli_query($conn, ("SELECT Sub_category from subcategories WHERE Type_no = '$sub'")))['Sub_category'] . ' ' . $row['year'] . "</span><br><span class='price'>$" . $row['price'] . "</span></h5>
-              <div class='hovered center-align'><a href='cart.php?product=" . $product . "' class='cart-button waves-effect waves-wine btn'>Add to Cart</a><a class='favorite waves-effect waves-light btn'><i class='material-icons'>favorite</i></a></div></div>";
+              <div class='hovered center-align'><a href='cart.php?product=" . $product . "' class='cart-button waves-effect waves-wine btn'>Add to Cart</a><a href='favorite.php?product=" . $product . "' class='favorite waves-effect waves-light btn'><i class='material-icons'>favorite</i></a></div></div>";
                         $count++;
                         if ($count % 3 == 0) {
                             echo "<div class='row'>";
@@ -428,13 +441,13 @@ if (!isset($_GET['sorting'])) {
                     $product = $row['product_id'];
                     $sub = mysqli_fetch_assoc(mysqli_query($conn, "SELECT sub_category_no FROM wine_sub WHERE product_id = '$product'"))['sub_category_no'];
                     echo "<div class='products col s12 m6 l4'>
-            <div class='card-panel'>
-            <div class='card-image'>
-            <img src='" . $row['image_url'] . "'>
-            </div>
-          </div>
-          <h5 class='list center-align'><span class='brand'>" . mysqli_fetch_assoc(mysqli_query($conn, ("SELECT brand_name FROM brand WHERE brand_id = '$brand'")))['brand_name'] . "</span><br><span class='make'>" . mysqli_fetch_assoc(mysqli_query($conn, ("SELECT Sub_category from subcategories WHERE Type_no = '$sub'")))['Sub_category'] . ' ' . $row['year'] . "</span><br><span class='price'>$" . $row['price'] . "</span></h5>
-          <div class='hovered center-align'><a href='cart.php?product=" . $product . "' class='cart-button waves-effect waves-wine btn'>Add to Cart</a><a class='favorite waves-effect waves-light btn'><i class='material-icons'>favorite</i></a></div></div>";
+                        <div class='card-panel'>
+                        <div class='card-image'>" . (in_array($product, $favorite) ? "<i class='starred material-icons'>grade</i>" : "") . "
+                        <img src='" . $row['image_url'] . "'>
+                        </div>
+                    </div>
+                    <h5 class='list center-align'><span class='brand'>" . mysqli_fetch_assoc(mysqli_query($conn, ("SELECT brand_name FROM brand WHERE brand_id = '$brand'")))['brand_name'] . "</span><br><span class='make'>" . mysqli_fetch_assoc(mysqli_query($conn, ("SELECT Sub_category from subcategories WHERE Type_no = '$sub'")))['Sub_category'] . ' ' . $row['year'] . "</span><br><span class='price'>$" . $row['price'] . "</span></h5>
+                    <div class='hovered center-align'><a href='cart.php?product=" . $product . "' class='cart-button waves-effect waves-wine btn'>Add to Cart</a><a href='favorite.php?product=" . $product . "' class='favorite waves-effect waves-light btn'><i class='material-icons'>favorite</i></a></div></div>";
                     $count++;
                     if ($count % 3 == 0) {
                         echo "<div class='row'>";

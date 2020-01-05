@@ -66,6 +66,7 @@ function filterCheck(buttons,fil) {
     }
 }
 
+
 // function sortvalue() {
 //     var sortval = document.getElementById("sorting").value;
 //     createCookie("sortval", sortval, 10);

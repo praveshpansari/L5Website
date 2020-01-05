@@ -34,6 +34,104 @@
   width: 100% !important;
 }
 
+.clearBtn {
+  margin-top: 3%;
+  margin-bottom: -5%;
+}
+
+.clearBtn a{
+  background-color: rgb(72, 18, 43);
+  color: white;
+  height: 50px;
+  line-height: 48px;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.clearBtn a:hover,a:focus{
+  background-color: transparent;
+  color: rgb(72, 18, 43);
+}
+
+.favorites {
+  margin-top: 5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  flex-direction: row;
+  height: 30rem;
+  min-height: 100vh;
+}
+.favorites .products{
+  padding: 4%;
+  flex-basis: 33%;
+}
+
+.no-item {
+  margin-top: 4%;
+}
+
+.no-item .card .card-content{
+  font-size: 1.76rem;
+  font-weight: lighter;
+  color: #663047;
+}
+
+.no-item .card .card-action {
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+}
+
+.favorites .card-panel {
+  width: 100%;
+  margin: auto;
+}
+
+.favorites .card-panel .card-image,.card-image:hover {
+  overflow: hidden;
+}
+
+.starred {
+  position: absolute;
+  margin-left:17rem;
+}
+
+.favorites .card-panel .card-image img {
+  height: 25rem;
+  width: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.favorites .card-panel .card-image img:hover {
+  transform: scale(1.1);
+}
+
+.favorites h5 .price {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-weight: bold;
+  color: #663047;
+  font-size: 1.55rem;
+}
+
+.favorites  h5 .brand {
+  text-transform: uppercase;
+  font-weight: lighter;
+  font-size: 1.25rem;
+}
+
+.favorites h5 .make {
+  font-style: italic;
+  font-weight: normal;
+  text-transform: lowercase;
+  font-size: 1.55rem;
+
+  font-family: "Playfair Display", serif;
+}
+
 .card.medium {
   width: 300px;
 }
