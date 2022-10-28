@@ -1,2 +1,2 @@
 # Wine website
-https://praveshpansari.infinityfreeapp.com
+praveshpansari.infinityfreeapp.com
